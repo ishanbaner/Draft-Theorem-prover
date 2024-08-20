@@ -5,5 +5,5 @@ It's a simple and basic structure of a theorem prover that deals with first-orde
 Expressions can be plugged in with the help of the solver method. 
 A few examples can be found in main.py.
 
-Significant improvements are needed but it's a very basic prottype.
+Significant improvements are needed but it's a very basic prototype.
 Currently, it lacks important expressions like "for all" and "exists".
