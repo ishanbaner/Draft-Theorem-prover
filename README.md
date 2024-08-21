@@ -6,7 +6,7 @@ Expressions can be plugged in with the help of the solver method.
 
 # Examples
 1. Prove: P=>(Q=>P)
-```
+```python
 solve=Solver()
 solve.solver(['=>','P',['=>','Q','P']])
 
