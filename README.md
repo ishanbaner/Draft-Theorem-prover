@@ -5,14 +5,14 @@ It's a simple and basic structure of a theorem prover that deals with first-orde
 Expressions can be plugged in with the help of the solver method.
 
 # Examples
-1. P=>(Q=>P)
+1. Prove: P=>(Q=>P)
 ```
 solve=Solver()
 solve.solver(['=>','P',['=>','Q','P']])
 
 ```
 2. Assume: P=>Q , Q=>R
-   P=>R
+   Prove: P=>R
 ```
 solve=Solver()
 solve.lemmas+=['=>','P','Q']
