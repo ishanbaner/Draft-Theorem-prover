@@ -11,14 +11,29 @@ solve=Solver()
 solve.solver(['=>','P',['=>','Q','P']])
 
 ```
+Output:
+```
+['=>', 'P', ['=>', 'Q', 'P']]
+Assumption P
+['=>', 'Q', 'P']
+Done
+```
 2. Assume: P=>Q , Q=>R
    Prove: P=>R
-```
+```python
 solve=Solver()
 solve.lemmas+=['=>','P','Q']
 solve.lemmas+=['=>','Q','R']
 solve.solver(['=>','P','R'])
 
+```
+Output:
+```
+['=>', 'P', 'R']
+Assumption P
+Assumption ['=>', 'P', 'Q']
+Assumption ['=>', 'Q', 'R']
+Done
 ```
 
 # Improvements to be made
