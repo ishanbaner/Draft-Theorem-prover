@@ -216,6 +216,9 @@ class Prover:
                     return(False)
             else:
                 return(self.Or(self.solver(exp[1]),self.solver(exp[2])))
+        else:
+            self.solveAssumption(exp,True)
+
 
 solve=Prover()
 
