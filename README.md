@@ -12,7 +12,7 @@ solve.solver(['=>','P',['=>','Q','P']])
 
 ```
 Output:
-```
+```output
 ['=>', 'P', ['=>', 'Q', 'P']]
 Assumption P
 ['=>', 'Q', 'P']
