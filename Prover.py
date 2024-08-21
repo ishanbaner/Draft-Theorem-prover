@@ -265,10 +265,7 @@ class Prover:
             self.solveAssumption(exp,True)
 
 solve=Prover()
-#solve.assumeTrue(['and','a','b'])
-#solve.solver(['not','a'])
-#solve.solver(['=>',['and','a','b'],['and','b',['not','a']]])
-#solve.solver(['=>',['and','a','b'],['and','a',['not','a']]])
+## A few examples:
 
 #solve.assumeFalse('a')
 #solve.solver(['and','a',['not','a']])
@@ -282,9 +279,6 @@ solve=Prover()
 #solve.lemmas+=[['=>','R',['not','Q']]]
 #solve.lemmas+=[['=>','R','S']]
 #solve.solver(['=>','P',['not','R']])
-
-#solve.lemmas+=[['=>',['not','R'],['=>','P','Q']]]
-#solve.solver(['=>','P',['=>','Q','R']])
 
 #solve.lemmas+=[['=>','P','Q']]
 #solve.lemmas+=[['=>','Q','R']]
