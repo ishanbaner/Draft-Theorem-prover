@@ -21,7 +21,7 @@ solve.solver(['=>','P','R'])
 
 ```
 
-#Improvements to be made
+# Improvements to be made
 Significant improvements are needed but it's a very basic prototype.
 Currently, it lacks important expressions like "for all" and "exists".
 
