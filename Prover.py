@@ -81,6 +81,12 @@ class Prover:
                         if type(v[1])!=list:
                             self.vals[v[1]]==True
                         else:
+                            self.assumeTrue(v[1])
+
+                    elif self.solver(v[2])==False:
+                        if type(v[1])!=list:
+                            self.vals[v[1]]=False
+                        else:
                             self.assumeFalse(v[1])
 
     def assumeFalse(self,v):
@@ -107,13 +113,50 @@ class Prover:
         
         return False
     
+    def variables(self,l):
+        vari=[]
+        for i in range(1,len(l)):
+            if type(l[i])!=list:
+                vari+=[l[i]]
+            else:
+                vari+=self.variables(l[i])
+        return(vari)
+
     def solveAssumption(self,g,t):
         lemmas=self.lemmas
+        '''
+        contr=False
+        if t:
+            print("Say ",g," is False")
+            self.assumeFalse(g)
+        elif t==False:
+            print("Say ",g," is True")
+            self.assumeTrue(g)
+
         for l in lemmas:
-            self.assumeTrue(l)
+            if g not in self.variables(l):
+                self.assumeTrue(l)
+            else:
+                if (self.solver(l))==False:
+                    print(self.solver(l))
+                    contr=True
+        if contr:
+            print("Proved by contradiction")
+        else:
+            print("Wrong Assumption")
     
+        #if (self.vals[g])==t:
+        #    print('Done')
+        '''
+        for l in lemmas:
+            if g not in self.variables(l):
+                self.assumeTrue(l)
+        for l in lemmas:
+            if g in self.variables(l):
+                self.assumeTrue(l)
         if (self.vals[g])==t:
             print('Done')
+        
 
     def solver(self,exp):
         if type(exp)!=list:
@@ -122,6 +165,7 @@ class Prover:
                     print("Done")
                 else:
                     print("Wrong assumption")
+
         if exp[0]=='=>':
             print(exp)
             if type(exp[2])!=list :
@@ -129,9 +173,9 @@ class Prover:
                     if self.vals[exp[2]]==True:
                     
                         print('Done')
-                        return(True)
+                        return(True) 
                     
-                elif (exp[1][-1] in self.vals.keys()) and (exp[2][-1] in self.vals.keys()):
+                if (exp[1] in self.vals.keys()) and (exp[2] in self.vals.keys()):
                     print(exp)
                     if self.Implies(exp[1][-1],exp[2][-1]):
                         print("Done") 
@@ -188,15 +232,15 @@ class Prover:
             if exp[1]==True:
                 print("Wrong assumption")
                 return(False)
-            elif (exp[1][-1] in self.vals.keys()):
-                if self.Not(exp[1][-1]):
+            elif (exp[1] in self.vals.keys()):
+                if self.Not(exp[1]):
                     print("Done") 
                     return(True)
                 else:
                     print("Wrong assumption")
                     return(False)
             else:
-                print("To show",exp[1],"is false")
+                #print("To show",exp[1],"is false")
                 state=self.Not(self.solver(exp[1]))
                 if state=='IC':
                     self.solveAssumption(exp[1],False)
@@ -216,17 +260,32 @@ class Prover:
                     return(False)
             else:
                 return(self.Or(self.solver(exp[1]),self.solver(exp[2])))
+            
         else:
             self.solveAssumption(exp,True)
 
-
 solve=Prover()
+#solve.assumeTrue(['and','a','b'])
+#solve.solver(['not','a'])
+#solve.solver(['=>',['and','a','b'],['and','b',['not','a']]])
+#solve.solver(['=>',['and','a','b'],['and','a',['not','a']]])
 
-#For P o Q, the expression would be ['o','P','Q'] for o being in {'=>','and','or'}
-#For not P, the expression would be ['not','P']
-#For example
-#Assuming P => (Q => R)
-#Show: (not R) => (P => (not Q))
+#solve.assumeFalse('a')
+#solve.solver(['and','a',['not','a']])
 
-solve.lemmas+=[['=>','P',['=>','Q','R']]]
-solve.solver(['=>',['not','R'],['=>','P',['not','Q']]])
+#solve.solver(['=>','P',['=>','Q','P']])
+
+#solve.lemmas+=[['=>','P',['=>','Q','R']]]
+#solve.solver(['=>',['not','R'],['=>','P',['not','Q']]])
+
+#solve.lemmas+=[['=>','P','Q']]
+#solve.lemmas+=[['=>','R',['not','Q']]]
+#solve.lemmas+=[['=>','R','S']]
+#solve.solver(['=>','P',['not','R']])
+
+#solve.lemmas+=[['=>',['not','R'],['=>','P','Q']]]
+#solve.solver(['=>','P',['=>','Q','R']])
+
+#solve.lemmas+=[['=>','P','Q']]
+#solve.lemmas+=[['=>','Q','R']]
+#solve.solver(['=>','P','R'])
