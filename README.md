@@ -22,7 +22,7 @@ solve.solver(['=>','P','R'])
 ```
 
 # Improvements to be made
-Significant improvements are needed but it's a very basic prototype.
-Currently, it lacks important expressions like "for all" and "exists".
-
-The code is not fully functional as in certain scenarios the code doesn't terminate. I will try to fix the problem asap.
+1. Significant improvements are needed to handle more complex cases as it's a very basic prototype.
+2. Currently, it lacks important expressions like "for all" and "exists".
+3. The code is not fully functional as in certain scenarios the code doesn't terminate. I will try to fix the problem asap.
+4. Complex writing structure is definitely a problem that I will soon fix.
